@@ -1,0 +1,57 @@
+{
+	"zookeeper" : {
+		"zookeeper-server": ["data-politics.com:2181"],
+		"zookeeper-internal": ["data-politics.com:2181"],
+		"zookeeper-user": "root",
+		"zookeeper-password": "h00p#8877uu",
+		"zookeeper-exhibitor": "http://data-politics.com/zookeeper/exhibitor/v1/ui/index.html",
+		"zookeeper-base": "/srv/zookeeper-srv/zookeeper-3.4.6",
+		"zookeeper-conf": "/srv/zookeeper-srv/zookeeper-3.4.6/conf",
+		"zookeeper-data": "/srv/zookeeper-srv/zookeeper-3.4.6/data",
+		"zookeeper-logs": "/srv/zookeeper-srv/zookeeper-3.4.6/logs"
+	},
+	
+	"kafka" : {
+		"kafka-server": ["data-politics.com"],
+		"kafka-internal": ["data-politics.com"],
+		"kafka-port": "8082",
+		"kafka-user": "root",
+		"kafka-password": "h00p#8877uu",
+		"kafka-base": "/srv/kafka-srv/kafka-0.8.1-src",
+		"kafka-conf": "/srv/kafka-srv/kafka-0.8.1-src/config",
+		"kafka-data": "/data/kafka/logs",
+		"kafka-logs": "/srv/kafka-srv/kafka-0.8.1-src/logs"
+	},
+	
+	"storm": {
+		"storm-server": ["data-politics.com"],
+		"storm-internal": ["data-politics.com"],
+		"storm-ui": "http://data-politics.com:8090/",
+		"storm-user": "root",
+		"storm-password": "h00p#8877uu",
+		"storm-base": "/srv/storm-srv/storm-0.9.0.1",
+		"storm-conf": "/srv/storm-srv/storm-0.9.0.1/conf",
+		"storm-data": "/srv/storm-srv/storm-0.9.0.1/data",
+		"storm-logs": "/srv/storm-srv/storm-0.9.0.1/logs"
+	},
+	
+	"couchbase": {
+		"couchbase-server": ["data-politics.com"],
+		"couchbase-internal":["data-politics.com"],
+		"couchbase-ui": "http://data-politics.com:8091/",
+		"couchbase-ui-user": "Administrator",
+		"couchbase-ui-password": "vagrant",
+		"couchbase-user": "root",
+		"couchbase-password": "h00p#8877uu"
+	},
+	
+	"webrouter": {
+		"webrouter-server": ["data-politics.com"],
+		"webrouter-internal": ["data-politics.com"],
+		"webrouter-base": "/root/conf/outhouse-web-router",
+		"webrouter-app-file": "WebRouter.js",
+		"webrouter-user": "root",
+		"webrouter-password": "h00p#8877uu"
+	}
+	
+}

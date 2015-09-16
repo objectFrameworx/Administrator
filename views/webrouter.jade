@@ -1,0 +1,121 @@
+extends layout
+
+mixin webrouter_resource_host(host)
+ span.host_title= host
+ br
+ table.host_table
+  tr
+   td
+     span Directory
+   td
+     span Size
+   td
+     span Used
+   td
+     span Available
+   td
+     span Used %
+  tr
+   td
+     span /
+   td
+     span= list_arguments[0][initial_params[3].indexOf(host)]
+   td
+     span= list_arguments[1][initial_params[3].indexOf(host)]
+   td
+     span= list_arguments[2][initial_params[3].indexOf(host)]
+   td
+     span= list_arguments[3][initial_params[3].indexOf(host)]   
+  tr
+   td
+     span= data_dir
+   td
+     span 
+   td
+     span= list_arguments[4][initial_params[3].indexOf(host)] 
+   td
+     span 
+   td
+     span
+
+mixin webrouter_resources
+ span.main_subtitle WebRouter hosts
+ hr
+ each host in initial_params[3]
+   mixin webrouter_resource_host(host)
+   br
+
+mixin webrouter_global
+  table.central
+    tr
+      td
+        h3 WebRouter
+          hr
+        div.btn-group-vertical(role="group", aria-label="...")
+          button#webrouter_start(type="button",class="btn btn-default") Start
+          button#webrouter_stop(type="button",class="btn btn-default") Stop
+          button#webrouter_restart(type="button",class="btn btn-default") Restart
+          span.btn-separator
+      td
+        div#main_div
+          mixin webrouter_resources
+      td
+        div.statistics
+          h4 Statistics
+          hr
+          span.span_title Status:
+          br
+          each runs in initial_params[0]
+            span.span_value= runs=="true"?'Running':'Stopped'
+            br
+          br
+          
+          span.span_title Up time:
+          br
+          each times in initial_params[2]
+            span.span_value= times
+            br
+          br
+          span.span_title Process ID:
+          br
+          each pids in initial_params[1]
+            span.span_value= pids
+            br
+          br
+          span.span_title WebRouter hosts:
+          br
+          each webrouter in initial_params[3]
+            span.span_value= webrouter
+            br
+          br
+          h4 Commands executed
+          hr
+          each cmd in status
+            span.span_title= cmd[0]
+            br
+            span.span_value= cmd[1]=='true'?'Successful':'Failed'
+            br
+            br
+          br
+block content
+  
+  div#page_header(class="page-header")
+    h1= title
+  ul#tabs(class="nav nav-tabs")
+    li#home_tab(role="presentation",class=(tab=="home"?'active':'inactive'))
+      a#home_tab_a(href="?tab=home") Home
+    li#zookeeper_tab(role="presentation",class=(tab=="cluster"?'active':'inactive'))
+      a#zookeeper_tab_a(href="?tab=cluster") Cluster
+    li#kafka_tab(role="presentation",class=(tab=="messaging"?'active':'inactive'))
+      a#kafka_tab_a(href="?tab=messaging") Messaging
+    li#storm_tab(role="presentation",class=(tab=="processing"?'active':'inactive'))
+      a#storm_tab_a(href="?tab=processing") Processing
+    li#couchbase_tab(role="presentation",class=(tab=="database"?'active':'inactive'))
+      a#couchbase_tab_a(href="?tab=database") Database
+    li#nodejs_tab(role="presentation",class=(tab=="webrouter"?'active':'inactive'))
+      a#nodejs_tab_a(href="?tab=webrouter") WebRouter
+    li#nginx_tab(role="presentation",class=(tab=="load_balancer"?'active':'inactive'))
+      a#nginx_tab_a(href="?tab=load_balancer") Load balancer
+  
+  div#load_content(class="load_content_iframe") 
+    mixin webrouter_global     

@@ -1,0 +1,205 @@
+extends layout2
+
+block content
+  <!-- BEGIN SIDEBPANEL-->
+  nav(class="page-sidebar",data-pages="sidebar")
+      <!-- BEGIN SIDEBAR MENU TOP TRAY CONTENT-->
+      div(class="sidebar-overlay-slide from-top",id="appMenu")
+        div(class="row")
+          div(class="col-xs-6 no-padding")
+            a(href="#",class="p-l-40")
+              img(src="assets/img/demo/social_app.svg",alt="socail")
+          div(class="col-xs-6 no-padding")
+            a(href="#",class="p-l-10")
+              img(src="assets/img/demo/email_app.svg",alt="socail")
+        div(class="row")
+          div(class="col-xs-6 m-t-20 no-padding")
+            a(href="#",class="p-l-40")
+              img(src="assets/img/demo/calendar_app.svg",alt="socail")
+          div(class="col-xs-6 m-t-20 no-padding")
+            a(href="#",class="p-l-10")
+              img(src="assets/img/demo/add_more.svg",alt="socail")
+      <!-- END SIDEBAR MENU TOP TRAY CONTENT-->
+      <!-- BEGIN SIDEBAR MENU HEADER-->
+      div(class="sidebar-header")
+        img(src="assets/img/logo_white.png",alt="logo",class="brand",data-src="assets/img/logo_white.png",data-src-retina="assets/img/logo_white_2x.png",width="78",height="22")
+        div(class="sidebar-header-controls")
+         button(type="button",class="btn btn-xs sidebar-slide-toggle btn-link m-l-20",data-pages-toggle="#appMenu")
+           i(class="fa fa-angle-down fs-16")
+         button(type="button",class="btn btn-link visible-lg-inline",data-toggle-pin="sidebar")
+           i(class="fa fs-12")
+      <!-- END SIDEBAR MENU HEADER-->
+      <!-- START SIDEBAR MENU -->
+      div(class="sidebar-menu")
+        <!-- BEGIN SIDEBAR MENU ITEMS-->
+        ul(class="menu-items")
+          li(class="m-t-30 open")
+            a(href="home")
+              span(class="title") Home
+            span(class="icon-thumbnail open")
+              img(src="assets/img/hoopIcon.png",width="22",height="22")
+          li(class="")
+            a(href="index.html",class="detailed")
+              span(class="title") Patients
+              span(class="details") 12 Cases to Review
+            span(class="icon-thumbnail")
+              img(src="assets/img/patientsIcon.png",width="22",height="22")
+          li(class="")
+            a(href="email.html",class="detailed")
+              span(class="title") Network
+              span(class="details") 2 New \/ 1 Down
+            span(class="icon-thumbnail")
+              img(src="assets/img/networkIcon.png",width="22",height="22")
+          li(class="")
+            a(href="social.html")
+              span(class="title") Financials
+            span(class="icon-thumbnail")
+              img(src="assets/img/financialsIcon.png",width="22",height="22")
+          li(class="")
+            a(href="javascript:;")
+              span(class="title") System
+              span(class="arrow")
+            span(class="icon-thumbnail")
+              img(src="assets/img/systemIcon.png",width="22",height="22")
+            ul(class="sub-menu")
+             li(class="")
+               a(href="cluster") Cluster
+               span(class="icon-thumbnail") c
+             li(class="")
+               a(href="messaging") Messaging
+               span(class="icon-thumbnail") m
+             li(class="")
+               a(href="processing") Processing
+               span(class="icon-thumbnail") p
+             li(class="")
+               a(href="database") Database
+               span(class="icon-thumbnail") d
+             li(class="")
+               a(href="webrouter") Web Router
+               span(class="icon-thumbnail") wr
+             li(class="")
+               a(href="loadbalancer") Modals
+               span(class="icon-thumbnail") lb
+        div(class="clearfix")
+        
+  <!-- START PAGE-CONTAINER -->
+  div(class="page-container")
+   div(class="header")
+      div(class="pull-left full-height visible-sm visible-xs")
+        div(class="sm-action-bar")
+          a(href="#",class="btn-link toggle-sidebar",data-toggle="sidebar")
+            span(class="icon-set menu-hambuger")
+      div(class="pull-right full-height visible-sm visible-xs")
+          div(class="sm-action-bar")
+            a(href="#",class="btn-link",data-toggle="quickview",data-toggle-element="#quickview")
+              span(class="icon-set menu-hambuger-plus")
+      div(class="pull-left sm-table")
+          div(class="header-inner")
+            div(class="brand inline fa fa-angle-down fs-16")
+              img(src="assets/img/logo.png",alt="logo",data-src="assets/img/logo.png",data-src-retina="assets/img/logo_2x.png",style="padding-left: 25px")
+            a(href="#",class="search-link",data-toggle="search")
+              i(class="pg-search")
+              span Type anywhere to 
+              span(class="bold") search
+      div(class="pull-right")
+          div(class="header-inner")
+            a(href="#",class="btn-link icon-set menu-hambuger-plus m-l-20 sm-no-margin hidden-sm hidden-xs",data-toggle="quickview",data-toggle-element="#quickview")
+      div(class="pull-right")
+          div(class="visible-lg visible-md m-t-10")
+            div(class="pull-left p-r-10 p-t-10 fs-16 font-heading")
+              span(class="semi-bold") Dr. Smart
+            div(class="thumbnail-wrapper d32 circular inline m-t-5")
+              img(src="assets/img/profiles/avatar.jpg",alt="",data-src="assets/img/profiles/avatar.jpg",data-src-retina="assets/img/profiles/avatar_small2x.jpg",width="32",height="32")
+   div(class="page-content-wrapper")
+    div(class="content sm-gutter")
+      block inner_content
+      div(class="container-fluid container-fixed-lg footer")
+        div(class="copyright sm-text-center")
+          p(class="small no-margin pull-left sm-pull-reset")
+            span(class="hint-text") Copyright © 2015  
+            span(class="font-montserrat") DATA.  
+            span(class="hint-text") All rights reserved.
+            span(class="sm-block")
+              a(href="#",class="m-l-10 m-r-10") Terms of use
+              span | 
+              a(href="#",class="m-l-10") Privacy Policy
+          div(class="clearfix")
+       
+      div(class="overlay hide",data-pages="search")
+        div(class="overlay-content has-results m-t-20")
+          div(class="container-fluid")
+            img(class="overlay-brand",src="assets/img/logo.png",alt="logo",data-src="assets/img/logo.png",data-src-retina="assets/img/logo_2x.png")
+            a(href="#",class="close-icon-light overlay-close text-black fs-16")
+              i(class="pg-close")
+          div(class="container-fluid")
+            input(id="overlay-search",class="no-border overlay-search bg-transparent",placeholder="Search...",autocomplete="off",spellcheck="false")
+            br
+            div(class="inline-block")
+              div(class="checkbox right")
+                input(id="checkboxn",type="checkbox",value="1",checked="checked")
+                label(for="checkboxn")
+                  i(class="fa fa-search")
+                  span Search within page
+            div(class="inline-block m-l-10")
+              p(class="fs-13") Press enter to search
+          div(class="container-fluid")
+            span
+              strong suggestions :
+            span(id="overlay-suggestions")
+            br
+            div(class="search-results m-t-40")
+              p(class="bold") Pages Search Results
+              div(class="row")
+                div(class="col-md-6")
+                  div(class="")
+                    div(class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10")
+                      div
+                        img(width="50",height="50",src="assets/img/profiles/avatar.jpg",data-src="assets/img/profiles/avatar.jpg",data-src-retina="assets/img/profiles/avatar2x.jpg",alt="")
+                    div(class="p-l-10 inline p-t-5")
+                      h5(class="m-b-5")
+                        span(class="semi-bold result-name") ice cream
+                        span on pages
+                      p(class="hint-text") via john smith
+                  div(class="")
+                    div(class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10")
+                      div T
+                    div(class="p-l-10 inline p-t-5")
+                      h5(class="m-b-5")
+                        span(class="semi-bold result-name") ice cream
+                        span related topics
+                      p(class="hint-text") via pages
+                  div(class="")
+                    div(class="thumbnail-wrapper d48 circular bg-success text-white inline m-t-10")
+                      div
+                        i(class="fa fa-headphones large-text ")
+                    div(class="p-l-10 inline p-t-5")
+                      h5(class="m-b-5")
+                        span(class="semi-bold result-name") ice cream
+                        span music
+                      p(class="hint-text") via pagesmix
+                div(class="col-md-6")
+                  div(class="")
+                    div(class="thumbnail-wrapper d48 circular bg-info text-white inline m-t-10")
+                      div
+                        i(class="fa fa-facebook large-text")
+                    div(class="p-l-10 inline p-t-5")
+                      h5(class="m-b-5")
+                        span(class="semi-bold result-name") ice cream
+                        span on facebook
+                      p(class="hint-text") via facebook
+                  div(class="")
+                    div(class="thumbnail-wrapper d48 circular bg-complete text-white inline m-t-10")
+                      div 
+                        i(class="fa fa-twitter large-text ")
+                    div(class="p-l-10 inline p-t-5")
+                      h5(class="m-b-5") Tweats on
+                        span(class="semi-bold result-name") ice cream
+                      p(class="hint-text") via twitter
+                  div(class="")
+                    div(class="thumbnail-wrapper d48 circular text-white bg-danger inline m-t-10")
+                      div
+                        i(class="fa fa-google-plus large-text ")
+                    div(class="p-l-10 inline p-t-5")
+                      h5(class="m-b-5") Circles on
+                        span(class="semi-bold result-name") ice cream
+                      p(class="hint-text") via google plus

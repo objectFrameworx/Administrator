@@ -1,0 +1,211 @@
+extends layout
+
+mixin messaging_topics
+ span.main_subtitle List of existing topics
+ hr
+ div.btn-group(id="list_topic_buttons",role="group", aria-label="...")
+  if list_arguments[list_tasks.indexOf('list_topics')]
+    if action=="topic_delete"
+      if list_tasks.indexOf('topic_delete') > -1
+        if list_arguments[list_tasks.indexOf('topic_delete')]
+          a.confirm(id="delete_confirm",href="#")
+    if action=="topic_save"
+      if list_tasks.indexOf('topic_save') > -1
+        if list_arguments[list_tasks.indexOf('topic_save')]
+          a.confirm(id="save_confirm",href="#")  
+    if action=="remove_all"
+      if list_tasks.indexOf('delete_all') > -1
+        if list_arguments[list_tasks.indexOf('delete_all')]
+          a.confirm(id="delete_all_confirm",href="#")       
+    each topic in list_arguments[list_tasks.indexOf('list_topics')]
+      if action=="topic_delete"
+        if topics==topic
+          button(type="button",class="btn btn-default deleted a_topic")= topic
+        else
+          button(type="button",class="btn btn-default a_topic")= topic
+      else if action=="topic_save"
+        if topics==topic
+          button(type="button",class="btn btn-default hightlight a_topic")= topic
+        else
+          button(type="button",class="btn btn-default a_topic")= topic
+      else if action=="topic_details"
+        if topics==topic
+          button(type="button",class="btn btn-default active a_topic")= topic
+          br
+          if list_tasks.indexOf('topic_details') > -1
+            if list_arguments[list_tasks.indexOf('topic_details')]
+              div.topic_detail
+                div.btn-group-xs(id="delete_topic_buttons",role="group", aria-label="...")
+                 button(alt= topic,type="button",class="btn btn-danger delete_topic") Remove
+                br
+                each line in list_arguments[list_tasks.indexOf('topic_details')]  
+                  span= line
+                  br
+        else
+          button(type="button",class="btn btn-default a_topic")= topic
+      else
+        button(type="button",class="btn btn-default a_topic")= topic
+      
+  else
+   h4 No topics found!
+ hr
+ div.btn-group(id="main_bottom_buttons",role="group", aria-label="...")
+   button#processing_add_topics(type="button",class="btn btn-primary") Add topic
+   
+
+mixin messaging_resource_host(host)
+ span.host_title= host
+ br
+ table.host_table
+  tr
+   td
+     span Directory
+   td
+     span Size
+   td
+     span Used
+   td
+     span Available
+   td
+     span Used %
+  tr
+   td
+     span /
+   td
+     span= list_arguments[0][initial_params[4].indexOf(host)]
+   td
+     span= list_arguments[1][initial_params[4].indexOf(host)]
+   td
+     span= list_arguments[2][initial_params[4].indexOf(host)]
+   td
+     span= list_arguments[3][initial_params[4].indexOf(host)]   
+  tr
+   td
+     span= data_dir
+   td
+     span 
+   td
+     span= list_arguments[4][initial_params[4].indexOf(host)] 
+   td
+     span 
+   td
+     span  
+  tr
+   td
+     span= logs_dir
+   td
+     span 
+   td
+     span= list_arguments[5][initial_params[4].indexOf(host)] 
+   td
+     span 
+   td
+     span     
+
+mixin messaging_resources
+ span.main_subtitle Broker list [disk usage]
+ hr
+ each host in initial_params[4]
+   mixin messaging_resource_host(host)
+   br
+
+mixin messaging_global
+  table.central
+    tr
+      td
+        h3 Messaging
+          hr
+        div.btn-group-vertical(role="group", aria-label="...")
+          button#processing_topics(type="button",class="btn btn-primary") Topics
+          button#processing_resources(type="button",class="btn btn-primary") Resources
+          span.btn-separator
+          button#processing_start(type="button",class="btn btn-default") Start
+          button#processing_stop(type="button",class="btn btn-default") Stop
+          button#processing_restart(type="button",class="btn btn-default") Restart
+          button#processing_clean(type="button",class="btn btn-default") Clean
+          
+          //if all_running=="true"
+          // button#processing_start(type="button",class="btn btn-default", disabled="disabled") Start
+          // button#processing_stop(type="button",class="btn btn-default") Stop
+          // button#processing_restart(type="button",class="btn btn-default") Restart
+          // button#processing_clean(type="button",class="btn btn-default", disabled="disabled") Clean
+          //else
+          // button#processing_start(type="button",class="btn btn-default") Start
+          // button#processing_stop(type="button",class="btn btn-default") Stop
+          // button#processing_restart(type="button",class="btn btn-default") Restart
+          // button#processing_clean(type="button",class="btn btn-default") Clean
+     
+      td
+        div#main_div
+          if category=="list_topics"
+            mixin messaging_topics
+          else
+            mixin messaging_resources
+          //else
+          // h5 To be completed... 
+      td
+        div.statistics
+          h4 Statistics
+          hr
+          span.span_title Status:
+          br
+          each runs in initial_params[0]
+            span.span_value= runs=="true"?'Running':'Stopped'
+            br
+          br
+          
+          span.span_title Up time:
+          br
+          each times in initial_params[2]
+            span.span_value= times
+            br
+          br
+          span.span_title Process ID:
+          br
+          each pids in initial_params[1]
+            span.span_value= pids
+            br
+          br
+          span.span_title Zookeeper ensemble:
+          br
+          each zoo in initial_params[3]
+            span.span_value= zoo
+            br
+          br
+          span.span_title Kafka brokers:
+          br
+          each kafka in initial_params[4]
+            span.span_value= kafka
+            br
+          br
+          h4 Commands executed
+          hr
+          each cmd in status
+            span.span_title= cmd[0]
+            br
+            span.span_value= cmd[1]=='true'?'Successful':'Failed'
+            br
+            br
+          br
+block content
+  
+  div#page_header(class="page-header")
+    h1= title
+  ul#tabs(class="nav nav-tabs")
+    li#home_tab(role="presentation",class=(tab=="home"?'active':'inactive'))
+      a#home_tab_a(href="?tab=home") Home
+    li#zookeeper_tab(role="presentation",class=(tab=="cluster"?'active':'inactive'))
+      a#zookeeper_tab_a(href="?tab=cluster") Cluster
+    li#kafka_tab(role="presentation",class=(tab=="messaging"?'active':'inactive'))
+      a#kafka_tab_a(href="?tab=messaging") Messaging
+    li#storm_tab(role="presentation",class=(tab=="processing"?'active':'inactive'))
+      a#storm_tab_a(href="?tab=processing") Processing
+    li#couchbase_tab(role="presentation",class=(tab=="database"?'active':'inactive'))
+      a#couchbase_tab_a(href="?tab=database") Database
+    li#nodejs_tab(role="presentation",class=(tab=="web_server"?'active':'inactive'))
+      a#nodejs_tab_a(href="?tab=webrouter") WebRouter
+    li#nginx_tab(role="presentation",class=(tab=="load_balancer"?'active':'inactive'))
+      a#nginx_tab_a(href="?tab=load_balancer") Load balancer
+  
+  div#load_content(class="load_content_iframe") 
+    mixin messaging_global     

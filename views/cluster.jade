@@ -1,0 +1,8 @@
+extends index
+
+mixin cluster_admin
+  iframe.load_external(src= redirect_url)
+
+block inner_content
+  div#load_content(class="load_content_iframe") 
+    mixin cluster_admin     

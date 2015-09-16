@@ -1,0 +1,1 @@
+[32minfo[39m: Forever stopped process: [37m [39m [37muid[39m [90mcommand[39m [90mscript[39m [37mforever[39m [37mpid[39m [37mid[39m [35mlogfile[39m [33muptime[39m [0] LzwK [90m/usr/local/bin/node[39m [90m/root/WebRouter/outhouse-web-router/WebRouter.js[39m 13067 13069 [35m/root/.forever/LzwK.log[39m [33m0:0:2:53.476[39m

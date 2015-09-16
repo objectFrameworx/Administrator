@@ -1,0 +1,8 @@
+OpenJDK 64-Bit Server VM warning: Insufficient space for shared memory file:
+   /tmp/hsperfdata_root/2091
+Try using the -Djava.io.tmpdir= option to select an alternate temp location.
+
+generate.report.data
+upload.claims.cms
+upload.hoop.data
+upload.raw.hl7v2

@@ -1,0 +1,74 @@
+getRemoveAllTopicsCmd = function() {
+	var deferred = Q.defer();
+	var command = "";
+	var list_args = [];
+	if(!fs.existsSync('./stdoutput/out_topics.txt')){
+		processing.processing_rexec('/srv/kafka-srv/kafka-0.8.1-src/bin/kafka-topics.sh --list --zookeeper 104.130.28.114:2181', 'topics', function(list_arguments){ 
+			list_args = list_arguments;
+			
+			(function loop() {
+        		if (i < list_args.length) {
+        			
+        			if(command.length == 0) {
+        				command = '/srv/kafka-srv/kafka-0.8.1-src/bin/kafka-topics.sh  --zookeeper 104.130.28.114:2181 --topic ' + list_args[i]
+        			}
+        			else {
+        				command = command + '; /srv/kafka-srv/kafka-0.8.1-src/bin/kafka-topics.sh  --zookeeper 104.130.28.114:2181 --topic ' + list_args[i]
+        			}
+        		
+        			if(i==(list_args.length-1)) {
+        				deferred.resolve
+        				callback(command);
+		        	}
+		        	else {
+		        		i++;
+			            loop();
+		        	}
+        		}
+        	}());
+		});
+	}
+	else {
+		new lazy(fs.createReadStream('./stdoutput/out_topics.txt'))
+        .lines
+        .forEach(function(line){
+        	list_args.push(line.toString());
+        }).on('pipe', function() {
+        	var i=0;
+        	
+        	(function loop() {
+        		if (i < list_args.length) {
+        			
+        			if(command.length == 0) {
+        				command = '/srv/kafka-srv/kafka-0.8.1-src/bin/kafka-topics.sh  --zookeeper 104.130.28.114:2181 --topic ' + list_args[i]
+        			}
+        			else {
+        				command = command + '; /srv/kafka-srv/kafka-0.8.1-src/bin/kafka-topics.sh  --zookeeper 104.130.28.114:2181 --topic ' + list_args[i]
+        			}
+        		
+        			if(i==(list_args.length-1)) {
+        				deferred.resolve
+        				callback(command);
+		        	}
+		        	else {
+		        		i++;
+			            loop();
+		        	}
+        		}
+        	}());
+        });
+		
+	}
+	return deferred.promise;
+}
+
+//Delete All
+		if(query.action=='remove_all') {
+			
+			getRemoveAllTopicsCmd()(function(command){
+				cmds.push(getRemoveAllTopicsCmd());
+				tasks.push('delete_all');
+				console.log(command)
+			});
+		}
+		

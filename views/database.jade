@@ -1,0 +1,27 @@
+extends layout
+
+mixin database_admin
+  iframe.load_external(src= redirect_url)
+
+block content
+  
+  div#page_header(class="page-header")
+    h1= title
+  ul#tabs(class="nav nav-tabs")
+    li#home_tab(role="presentation",class=(tab=="home"?'active':'inactive'))
+      a#home_tab_a(href="?tab=home") Home
+    li#zookeeper_tab(role="presentation",class=(tab=="cluster"?'active':'inactive'))
+      a#zookeeper_tab_a(href="?tab=cluster") Cluster
+    li#kafka_tab(role="presentation",class=(tab=="messaging"?'active':'inactive'))
+      a#kafka_tab_a(href="?tab=messaging") Messaging
+    li#storm_tab(role="presentation",class=(tab=="processing"?'active':'inactive'))
+      a#storm_tab_a(href="?tab=processing") Processing
+    li#couchbase_tab(role="presentation",class=(tab=="database"?'active':'inactive'))
+      a#couchbase_tab_a(href="?tab=database") Database
+    li#nodejs_tab(role="presentation",class=(tab=="web_server"?'active':'inactive'))
+      a#nodejs_tab_a(href="?tab=webrouter") WebRouter
+    li#nginx_tab(role="presentation",class=(tab=="load_balancer"?'active':'inactive'))
+      a#nginx_tab_a(href="?tab=load_balancer") Load balancer
+  
+  div#load_content(class="load_content_iframe") 
+    mixin database_admin     
